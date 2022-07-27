@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     private TextInputEditText campoEmail;
     private TextView textoResultado;
     private CheckBox checkVerde, checkBranco, checkVermelho;
-
+    private RadioButton sexoMasculino, sexoFeminino;
+    private RadioGroup opcaoSexo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         checkVerde = findViewById(R.id.checkVerde);
         checkBranco = findViewById(R.id.checkBranco);
         checkVermelho = findViewById(R.id.checkVermelho);
+
+        //RadioButton
+        sexoMasculino = findViewById(R.id.radioButtonMasculino);
+        sexoFeminino = findViewById(R.id.radioButtonFeminino);
+        opcaoSexo = findViewById(R.id.radioGroupSexo);
+        radioButton();
     }
 
     public String checkbox() {
@@ -39,27 +48,48 @@ public class MainActivity extends AppCompatActivity {
 
         if (checkVerde.isChecked()) {
             corSelecionada = checkVerde.getText().toString();
-            texto = corSelecionada+" selecionado - ";
+            texto = corSelecionada + " selecionado - ";
         }
         if (checkBranco.isChecked()) {
             corSelecionada = checkBranco.getText().toString();
-            texto = texto + corSelecionada+" selecionado - ";
+            texto = texto + corSelecionada + " selecionado - ";
         }
         if (checkVermelho.isChecked()) {
             corSelecionada = checkVermelho.getText().toString();
-            texto = texto + corSelecionada+" selecionado - ";
+            texto = texto + corSelecionada + " selecionado - ";
         }
         return texto;
 
     }
 
+    public void radioButton() {
+        // Executar no tempo de execução
+        opcaoSexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                if(checkedId == R.id.radioButtonMasculino){
+                    textoResultado.setText("Masculino");
+                }else if(checkedId == R.id.radioButtonFeminino){
+                    textoResultado.setText("Feminino");
+                }
+            }
+        });
+
+//        if (sexoMasculino.isChecked()) {
+//            return sexoMasculino.getText().toString();
+//        } else {
+//            return sexoFeminino.getText().toString();
+//        }
+    }
+
     public void enviar(View view) {
         checkbox();
+
 
         String nome = campoNome.getText().toString();
         String email = campoEmail.getText().toString();
 
-        textoResultado.setText("nome: " + nome + "\nemail: " + email + "\n" + checkbox());
+        textoResultado.setText("nome: " + nome + "\nemail: " + email + "\n" + checkbox() + "\n" );
     }
 
     public void limpar(View view) {
