@@ -27,4 +27,5 @@ public class MainActivity extends AppCompatActivity {
 
         textResultado.setText(nome+"\n"+email);
     }
+    public void limpar(){}
 }
