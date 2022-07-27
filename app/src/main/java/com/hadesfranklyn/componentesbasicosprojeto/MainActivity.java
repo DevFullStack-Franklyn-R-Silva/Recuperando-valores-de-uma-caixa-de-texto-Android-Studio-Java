@@ -11,21 +11,32 @@ import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText campoNome;
+    private TextInputEditText campoEmail;
+    private TextView textoResultado;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        campoNome = findViewById(R.id.editNome);
+        campoEmail = findViewById(R.id.editEmail);
+        textoResultado = findViewById(R.id.textResultado);
     }
 
     public void enviar(View view) {
-        EditText campoNome = findViewById(R.id.editNome);
-        TextInputEditText campoEmail = findViewById(R.id.editEmail);
-        TextView textResultado = findViewById(R.id.textResultado);
 
         String nome = campoNome.getText().toString();
         String email = campoEmail.getText().toString();
 
-        textResultado.setText(nome+"\n"+email);
+        textoResultado.setText("nome: "+nome +"\nemail: " + email);
     }
-    public void limpar(){}
+
+    public void limpar(View view) {
+        campoNome.setText("");;
+        campoEmail.setText("");
+        textoResultado.setText("");
+    }
 }
